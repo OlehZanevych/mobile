@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Бандерштат</string>
+
+    <string name="products">Продукція</string>
+    <string name="producers">Виробники</string>
+    <string name="feedback">Є питання?</string>
+    <string name="contacts">Контакти</string>
+    <string name="login">Вхід</string>
+    <string name="registration">Реєстрація</string>
+</resources>

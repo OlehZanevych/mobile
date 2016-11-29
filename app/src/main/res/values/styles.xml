@@ -1,0 +1,54 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+    
+    <style name="Button">
+        <item name="android:textSize">28sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:layout_marginTop">@dimen/button_margin_top</item>
+        <item name="android:layout_marginBottom">@dimen/button_margin_bottom</item>
+        <item name="android:padding">@dimen/button_padding</item>
+    </style>
+
+    <style name="ProductsButton" parent="Button">
+        <item name="android:background">@drawable/first_button</item>
+        <item name="android:drawableLeft">@drawable/productsitem</item>
+        <item name="android:text">@string/products</item>
+    </style>
+
+    <style name="ProducersButton" parent="Button">
+        <item name="android:background">@drawable/second_button</item>
+        <item name="android:drawableLeft">@drawable/producersitem</item>
+        <item name="android:text">@string/producers</item>
+    </style>
+
+    <style name="FeedbackButton" parent="Button">
+        <item name="android:background">@drawable/third_button</item>
+        <item name="android:drawableLeft">@drawable/feedbackitem</item>
+        <item name="android:text">@string/feedback</item>
+    </style>
+
+    <style name="ContactsButton" parent="Button">
+        <item name="android:background">@drawable/fourth_button</item>
+        <item name="android:drawableLeft">@drawable/contactsitem</item>
+        <item name="android:text">@string/contacts</item>
+    </style>
+
+    <style name="LoginButton" parent="Button">
+        <item name="android:background">@drawable/fifth_button</item>
+        <item name="android:drawableLeft">@drawable/loginitem</item>
+        <item name="android:text">@string/login</item>
+    </style>
+
+    <style name="RegistrationButton" parent="Button">
+        <item name="android:background">@drawable/sixth_button</item>
+        <item name="android:drawableLeft">@drawable/registrationitem</item>
+        <item name="android:text">@string/registration</item>
+    </style>
+</resources>
