@@ -25,6 +25,8 @@ public class ProductManager {
     public static final String PRODUCTS_URI = ProductResource.PRODUCT_API_URI +
             "?fields=id,productTypeId,category,producerId,cost,imageUri";
 
+    public static final String PRODUCT_URI = ProductResource.PRODUCT_API_URI + "?fields=all";
+
     public static List<Product> getList() {
         RestTemplate request = new RestTemplate(true);
         request.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
@@ -75,6 +77,58 @@ public class ProductManager {
             products.add(product);
         }
         return products;
+    }
+
+    public static Product getById(Long id) {
+        RestTemplate request = new RestTemplate(true);
+        request.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+
+        ResponseEntity<PagedProductTypeResultResource> productTypeResponseEntity =
+                request.getForEntity(PRODUCT_TYPES_URI, PagedProductTypeResultResource.class);
+        List<ProductTypeResource> productTypes = productTypeResponseEntity.getBody().getResources();
+        Map<Long, String> productTypesNames = new HashMap<Long, String>();
+        for (ProductTypeResource productType : productTypes) {
+            productTypesNames.put(productType.getId(), productType.getName());
+        }
+
+        ResponseEntity<PagedProducerResultResource> producersResponseEntity =
+                request.getForEntity(PRODUCERS_URI, PagedProducerResultResource.class);
+        List<ProducerResource> producers = producersResponseEntity.getBody().getResources();
+        Map<Long, String> producersNames = new HashMap<Long, String>();
+        for (ProducerResource producer : producers) {
+            producersNames.put(producer.getId(), producer.getName());
+        }
+
+        ResponseEntity<PagedProductResultResource> productResponseEntity =
+                request.getForEntity(PRODUCT_URI, PagedProductResultResource.class);
+        List<ProductResource> productResources = productResponseEntity.getBody().getResources();
+
+        List<Product> products = new ArrayList<>();
+        for (ProductResource productResource : productResources) {
+            Product product = new Product();
+            product.setId(productResource.getId());
+            product.setProductTypeName(productTypesNames.get(productResource.getProductTypeId()));
+            switch (productResource.getCategory()) {
+                case MAN:
+                    product.setCategoryName("Для чоловіків");
+                    break;
+                case WOMAN:
+                    product.setCategoryName("Для жінок");
+                    break;
+                case BOY:
+                    product.setCategoryName("Для хлопчиків");
+                    break;
+                case GIRL:
+                    product.setCategoryName("Для дівчаток");
+                    break;
+            }
+            product.setProducerName(producersNames.get(productResource.getProducerId()));
+            product.setCost(productResource.getCost());
+            product.setImageUri(productResource.getImageUri());
+            product.setInfo(productResource.getInfo());
+            products.add(product);
+        }
+        return products.get((int)(long) id - 1);
     }
 
 

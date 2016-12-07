@@ -1,9 +1,11 @@
 package org.shop.mobile;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -29,6 +31,13 @@ public class ProductsActivity extends ListActivity {
     protected void onStart() {
         super.onStart();
         new ProductsActivity.ProductsTask().execute();
+    }
+
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        Intent intent = new Intent(ProductsActivity.this, ProductActivity.class);
+        intent.putExtra(ProductActivity.EXTRA_PRODUCT_ID, id);
+        startActivity(intent);
     }
 
     private class ProductsTask extends AsyncTask<Void, Void, List<Product>> {

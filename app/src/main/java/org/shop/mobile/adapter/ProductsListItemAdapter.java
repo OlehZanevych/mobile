@@ -38,7 +38,7 @@ public class ProductsListItemAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int i) {
-        return i;
+        return products.get(i).getId();
     }
 
     @Override
@@ -57,10 +57,10 @@ public class ProductsListItemAdapter extends BaseAdapter {
         TextView cost = (TextView) convertView.findViewById(R.id.products_list_item_cost);
 
         Product product = products.get(position);
-        productTypeName.setText(product.getProductTypeName());
-        categoryName.setText(product.getCategoryName());
-        producerName.setText(product.getProducerName());
-        cost.setText(product.getCost().toString());
+        productTypeName.setText("Тип: " + product.getProductTypeName());
+        categoryName.setText(("Категорія: " + product.getCategoryName()));
+        producerName.setText("Виробник: " + product.getProducerName());
+        cost.setText("Ціна: " + product.getCost() + " грн");
         new ImageTask(image).execute(product.getImageUri());
 
         return convertView;
